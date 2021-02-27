@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .header {
+            padding: 80px; /* some padding */
+            text-align: center; /* center the text */
+            background-color: #1abc9c; /* green background */
+            color: white; /* white text color */
+        }
+
+        /* Increase the font size of the <h1> element */
+        .header h1 {
+            font-size: 40px;
+        }
+
+        .navbar {
+            overflow: hidden; /* Hide overflow */
+            background-color: #333; /* Dark background color */
+        }
+
+        /* Style the navigation bar links */
+        .navbar a {
+            /* float: left; /* Make sure that the links stay side-by-side */
+            display: block; /* Change the display to block, for responsive reasons (see below) */
+            color: white; /* White text color */
+            text-align: center; /* Center the text */
+            padding: 14px 20px; /* Add some padding */
+            text-decoration: none; /* Remove underline */
+        }
+
+        /* Right-aligned link */
+        .navbar a.right {
+            float: right; /* Float a link to the right */
+        }
+
+        /* Change color on hover/mouse-over */
+        .navbar a:hover {
+            background-color: #ddd; /* Grey background color */
+            color: black; /* Black text color */
+        }
+
+
+
+        <div class="row">
+                        <div class="side">...</div>
+                                               <div class="main">...</div>
+                                                                      </div>
+                                                                        We use CSS Flexbox to handle the layout:
+
+                                                                            /* Ensure proper sizing */
+                                                                        * {
+                                                                            box-sizing: border-box;
+                                                                        }
+
+        /* Column container */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn1 {background-color: #1abc9c;} /* Blue */
+
+        /* Create two unequal columns that sits next to each other */
+        /* Sidebar/left column */
+        .side {
+            flex: 30%; /* Set the width of the sidebar */
+            background-color: #f1f1f1; /* Grey background color */
+            padding: 20px; /* Some padding */
+        }
+
+        /* Main column */
+        .main {
+            flex: 70%; /* Set the width of the main content */
+            background-color: white; /* White background color */
+            padding: 20px; /* Some padding */
+        }
+
+
+        /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 700px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+        @media screen and (max-width: 400px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+                margin: 10%;
+            }
+
+        }
+
+        th {
+            background-color: #1abc9c;
+            color: white;
+            height:50px;
+        }
+        table {
+            border-collapse:collapse;
+            border-bottom:1px solid black;
+            font-family: Tahoma,Verdana,Segoe,sans-serif;
+            width:100%;
+        }
+        tr {
+            border-top:1px solid black;
+            text-align:center;
+            height:100px;
+            width:50px;
+            background-color: lightblue;
+        }
+        td {
+            width:30px;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/home">WEB PROGRAMMING SHOP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item m-auto">
+                    <a class="nav-link active" href="/home">Home</a>
+                </li>
+                <li class="nav-item m-auto">
+                    <a class="nav-link active" href="/books/list">Knigi</a>
+                </li>
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="#">
+                        <th:block th:if="${#request.getRemoteUser() != null}"
+                                  th:text="${#request.getRemoteUser()}"></th:block>
+                    </a>
+                </li>
+            </ul>
+
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <a class="btn btn-primary btn-sm ml-3" href="/logout">
+                    <i class="fa fa-shopping-cart"></i> Logout
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="header">
+    <h1>Lista na knigi</h1>
+
+</div>
+
+
+<div id="container">
+
+    <div id="content">
+
+        <!-- put new button: Add Customer -->
+
+
+
+
+
+        <!--  add our html table here -->
+
+
+        <table>
+            <tr>
+                <th>Ime</th>
+                <th>Cena</th>
+                <th>Godina</th>
+                <th>Broj na strani</th>
+                <th>Slika</th>
+                <th>Moznost</th>
+                <th>Elektronska kosnicka</th>
+
+            </tr>
+
+
+            <tr th:each="kniga : ${booksList}">
+                <td th:text="${kniga.getName()}"></td>
+                <td th:text="${kniga.getPrice()}"></td>
+                <td th:text="${kniga.getYear()}"></td>
+                <td th:text="${kniga.getHorsepower()}"></td>
+
+                <td>   <img th:src="${kniga.getImage()}" width="180px" height="120px"/> </td>
+                <td>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form th:action="@{'/books/delete/{id}' (id=${kniga.getId()})}" th:method="DELETE">
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
+                    </form>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{'/books/edit-form/{id}' (id=${kniga.getId()})}"
+                       class="btn btn-sm btn-warning"><i class="fa fa-trash">Edit</i></a>
+                    </th:block>
+                    <form th:action="@{'/shopping-cart/add-product/{id}' (id=${kniga.getId()})}" th:method="POST">
+                        <button type="submit" class="btn btn-sm btn-outline-success"><i class="fa fa-trash">Add book to cart</i></button>
+                    </form>
+
+
+
+
+
+                </td>
+                <td>
+                    <a class="btn btn-success btn-sm ml-3" href="/shopping-cart">
+                        <i class="fa fa-shopping-cart"></i> Cart
+                    </a>
+
+                </td>
+
+            </tr>
+
+
+        </table>
+
+        <div>
+
+            <a href="/books/addBook" class="btn btn-primary btn-lg btn-block">Dodaj nova kniga</a>
+        </div>
+    </div>
+
+</div>
+
+<footer class="bg-secondary text-white text-center text-lg-start">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">List of books</h5>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled mb-0">
+                    <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2020 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+</body>
+</html>
